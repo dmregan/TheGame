@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Christmas Eve Game</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b1420;
+      color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 700px;
+      padding: 2rem;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    #countdown {
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      margin-top: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Countdown view -->
+  <div id="countdown-view">
+    <h1>The Game begins soon…</h1>
+    <p>Countdown to 10:00 on Christmas Eve.</p>
+    <div id="countdown">Calculating…</div>
+  </div>
+
+  <!-- Reveal view (hidden until time) -->
+  <div id="reveal-view" class="hidden">
+    <!-- TODO: replace image.jpg with your own image file name -->
+    <img src="image.jpg" alt="Christmas Eve Game" />
+    <h1>Welcome to The Game</h1>
+    <p>
+      Your first instructions go here.  
+      (You can put anything you like – a message, a clue, a poem, etc.)
+    </p>
+  </div>
+</div>
+
+<script>
+  // Set target time: 10:00 on 24 December THIS year, in the viewer's local time
+  const now = new Date();
+  let year = now.getFullYear();
+  let target = new Date(year, 11, 24, 10, 0, 0); // month 11 = December
+
+  // If we're already past this year's Christmas Eve 10:00, use next year
+  if (now > target) {
+    year += 1;
+    target = new Date(year, 11, 24, 10, 0, 0);
+  }
+
+  const countdownEl = document.getElementById("countdown");
+  const countdownView = document.getElementById("countdown-view");
+  const revealView = document.getElementById("reveal-view");
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+
+    // If time reached or passed, show reveal
+    if (diff <= 0) {
+      countdownView.classList.add("hidden");
+      revealView.classList.remove("hidden");
+      clearInterval(timer);
+      return;
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / (3600 * 24));
+    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    countdownEl.textContent =
+      `${days}d ${String(hours).padStart(2, "0")}h ` +
+      `${String(minutes).padStart(2, "0")}m ` +
+      `${String(seconds).padStart(2, "0")}s`;
+  }
+
+  // Initial run and then update every second
+  updateCountdown();
+  const timer = setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
