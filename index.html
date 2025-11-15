@@ -20,6 +20,28 @@
       max-width: 700px;
       padding: 2rem;
     }
+    .crs-header {
+	  margin-bottom: 2rem;
+	}
+
+	.crs-logo {
+	  display: inline-block;
+	  padding: 0.6rem 1.2rem;
+	  border: 3px solid #f8f8f8;
+	  border-radius: 999px;
+	  font-weight: 700;
+	  letter-spacing: 0.25em;
+	  font-size: 1.6rem;      /* MUCH bigger */
+	  text-transform: uppercase;
+	}
+
+    .crs-tagline {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
     h1 {
       margin-bottom: 0.5rem;
     }
@@ -35,12 +57,17 @@
       max-width: 100%;
       height: auto;
       border-radius: 8px;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
     }
   </style>
 </head>
 <body>
 <div class="container">
+  <!-- CRS Header -->
+  <header class="crs-header">
+    <div class="crs-logo">CRS</div>
+  </header>
+
   <!-- Countdown view -->
   <div id="countdown-view">
     <h1>The Game begins soon…</h1>
@@ -50,13 +77,9 @@
 
   <!-- Reveal view (hidden until time) -->
   <div id="reveal-view" class="hidden">
-    <!-- TODO: replace image.jpg with your own image file name -->
-    <img src="image.jpg" alt="Christmas Eve Game" />
-    <h1>Welcome to The Game</h1>
-    <p>
-      Your first instructions go here.  
-      (You can put anything you like – a message, a clue, a poem, etc.)
-    </p>
+    <h1>Welcome to the Christmas Recreation Society Game</h1>
+    <img src="diorama_web_highdetail.jpg" alt="Magic Library Diorama" />
+    <p>It’s a magic time of year, but something is different in the library…</p>
   </div>
 </div>
 
@@ -64,7 +87,7 @@
   // Set target time: 10:00 on 24 December THIS year, in the viewer's local time
   const now = new Date();
   let year = now.getFullYear();
-  let target = new Date(year, 11, 24, 10, 0, 0); // month 11 = December
+  let target = new Date(year, 11, 24, 10, 00, 00); // month 11 = December
 
   // If we're already past this year's Christmas Eve 10:00, use next year
   if (now > target) {
