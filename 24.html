@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Journal 24 – Solve page 24</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Optional: Google font to get closer to J29’s feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Text&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      background: #f2e1b9;
+      color: #2b2520;
+      font-family: "Crimson Text", "Georgia", serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle “aged paper” / crack texture */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 18%, rgba(0,0,0,0.08) 0, transparent 55%),
+        radial-gradient(circle at 82% 20%, rgba(0,0,0,0.06) 0, transparent 60%),
+        radial-gradient(circle at 25% 72%, rgba(0,0,0,0.04) 0, transparent 55%),
+        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.03) 0, transparent 50%);
+      opacity: 0.4;
+      mix-blend-mode: multiply;
+      z-index: -1;
+    }
+
+    .page {
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 1.5rem 3.5rem;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      margin-bottom: 1.25rem;
+    }
+
+    .logo-main {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 2.3rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      margin-top: 0.25rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+    }
+
+    .prompt {
+      margin-top: 1.75rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .prompt strong {
+      font-weight: 600;
+    }
+
+    /* Answer bar styling – like J29: big black box with > button */
+    .answer-wrapper {
+      display: inline-flex;
+      border: 1px solid #111;
+      border-radius: 2px;
+      overflow: hidden;
+      font-size: 1.1rem;
+    }
+
+    .answer-input {
+      background: #111;
+      color: #fdf8ee;
+      border: none;
+      padding: 0.75rem 1.3rem;
+      min-width: 240px;
+      font-size: 1.1rem;
+      font-family: inherit;
+      outline: none;
+      text-align: left;
+    }
+
+    .answer-input::placeholder {
+      color: rgba(255,255,255,0.45);
+    }
+
+    .answer-button {
+      background: #111;
+      color: #fdf8ee;
+      border: none;
+      padding: 0.75rem 1.1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-family: inherit;
+      border-left: 1px solid #333;
+    }
+
+    .answer-button:hover {
+      background: #191919;
+    }
+
+    .feedback {
+      margin-top: 0.9rem;
+      min-height: 1.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: lowercase;
+    }
+
+    .feedback.wrong {
+      color: #9a1e1e;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="logo">
+      <div class="logo-main">JOURNAL24</div>
+      <div class="logo-sub">REVELATION</div>
+    </header>
+
+    <div class="prompt">
+      Solve page <strong>24</strong>:
+    </div>
+
+    <form id="answer-form">
+      <div class="answer-wrapper">
+        <input
+          type="text"
+          id="answer"
+          class="answer-input"
+          autocomplete="off"
+          autofocus
+          placeholder=""
+        />
+        <button type="submit" class="answer-button">&gt;</button>
+      </div>
+    </form>
+
+    <div id="feedback" class="feedback"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("answer-form");
+    const input = document.getElementById("answer");
+    const feedback = document.getElementById("feedback");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const value = (input.value || "").trim().toLowerCase();
+
+      if (!value) {
+        feedback.textContent = "";
+        feedback.classList.remove("wrong");
+        return;
+      }
+
+      if (value === "birthday") {
+        window.location.href = "call.html";
+      } else {
+        feedback.textContent = "wrong";
+        feedback.classList.add("wrong");
+      }
+    });
+  </script>
+</body>
+</html>
