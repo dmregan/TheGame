@@ -86,12 +86,12 @@
   // Set target time: 10:00 on 24 December THIS year, in the viewer's local time
   const now = new Date();
   let year = now.getFullYear();
-  let target = new Date(year, 11, 24, 10, 00, 00); // month 11 = December
+  let target = new Date(year, 11, 24, 11, 00, 00); // month 11 = December
 
   // If we're already past this year's Christmas Eve 10:00, use next year
   if (now > target) {
     year += 1;
-    target = new Date(year, 11, 24, 10, 0, 0);
+    target = new Date(year, 11, 24, 11, 0, 0);
   }
 
   const countdownEl = document.getElementById("countdown");
